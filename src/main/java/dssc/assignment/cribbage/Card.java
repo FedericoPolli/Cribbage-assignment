@@ -2,19 +2,19 @@ package dssc.assignment.cribbage;
 
 public class Card {
 
-    private String cardrank;
-    private Suite cardsuite;
+    private String CardRank;
+    private Suite CardSuite;
 
-    public Card(String cardrank, Suite cardsuite) {
-        this.cardrank = cardrank;
-        this.cardsuite = cardsuite;
+    public Card(String CardRank, Suite CardSuite) {
+        this.CardRank = CardRank;
+        this.CardSuite = CardSuite;
     }
 
     public String rank() {
-        return cardrank;
+        return CardRank;
     }
 
     public Suite suite() {
-        return cardsuite;
+        return CardSuite;
     }
 }
