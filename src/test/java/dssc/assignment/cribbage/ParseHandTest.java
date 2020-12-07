@@ -9,11 +9,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParseHandTest {
 
     @Test
-    void parseOneCard() {
+    void parseFiveOfHearts() {
         Card card = CardParser.parseCard("5H");
         assertAll(
                 () -> assertEquals("5", card.rank()),
-                () -> assertEquals(Suite.HEART, card.suite())
+                () -> assertEquals(Suite.HEARTS, card.suite())
+        );
+    }
+
+    @Test
+    void parseAceOfSpades() {
+        Card card = CardParser.parseCard("AS");
+        assertAll(
+                () -> assertEquals("A", card.rank()),
+                () -> assertEquals(Suite.SPADES, card.suite())
         );
     }
 }
