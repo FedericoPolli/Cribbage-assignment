@@ -34,4 +34,8 @@ public class Card {
     public Suite suite() { return CardSuite; }
 
     public int valueFifteenTwos() {return ValueForFifteenTwos;}
+
+    public boolean isJack() {
+        return (CardRank.equals(Rank.JACK));
+    }
 }

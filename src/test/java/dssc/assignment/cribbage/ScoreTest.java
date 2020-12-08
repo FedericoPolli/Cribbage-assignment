@@ -8,7 +8,7 @@ public class ScoreTest {
 
     @Test
     void ParseScore() {
-        Hand hand = new Hand("AS4H8DKHJS");
-        assertEquals(0, hand.getscore());
+        CribbageScore score = new CribbageScore("AS4H8DJHKH");
+        assertEquals(1, score.getScore());
     }
 }

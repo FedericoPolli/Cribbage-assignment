@@ -30,14 +30,20 @@ public class ParseHandTest {
     }
 
     @Test
-    void parseTenOfDiamonds() {
-        Card card = CardParser.parseCard("0D");
+    void parseJackOfDiamonds() {
+        Card card = CardParser.parseCard("JD");
         assertAll(
-                () -> assertEquals(Rank.TEN, card.rank()),
+                () -> assertEquals(Rank.JACK, card.rank()),
                 () -> assertEquals(Suite.DIAMONDS, card.suite()),
-                () -> assertEquals(10, card.valueFifteenTwos())
+                () -> assertEquals(10, card.valueFifteenTwos()),
+                () -> assertEquals(true, card.isJack())
 
         );
     }
 
+ /*   @Test
+    void ParseLastCard() {
+        Hand hand = new Hand("AS4H8DKHJS");
+        assertEquals(Rank.KING, hand.GetLastCard().rank());
+    }*/
 }
