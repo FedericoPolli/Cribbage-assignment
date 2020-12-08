@@ -12,6 +12,13 @@ public class CribbageScore {
         if (hand.IsJackSameSuitOfStarterCard()) {
             score += 1;
         }
+        if (hand.IsFlushInHand()) {
+            if (hand.IsFirstCardSameSuitAsStarterCard()) {
+                score += 5;
+            } else {
+                score += 4;
+            }
+        }
 
 
         return score;

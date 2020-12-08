@@ -14,8 +14,6 @@ public class Hand {
             hand.add(CardParser.parseCard(cards));
         }
     }
-
-    
     
     public Card GetLastCard() {
         return hand.get(4);
@@ -33,5 +31,25 @@ public class Hand {
             }
         }
         return false;
+    }
+
+
+    public boolean IsFlushInHand() {
+        Card currentCard;
+        Card followingCard;
+        for (int i = 0; i < 3; i++) {
+            currentCard = hand.get(i);
+            followingCard = hand.get(i+1);
+            if (! currentCard.suite().equals(followingCard.suite())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean IsFirstCardSameSuitAsStarterCard() {
+        Card FirstCard = hand.get(0);
+        Card StarterCard = hand.get(4);
+        return (FirstCard.suite().equals(StarterCard.suite()));
     }
 }
