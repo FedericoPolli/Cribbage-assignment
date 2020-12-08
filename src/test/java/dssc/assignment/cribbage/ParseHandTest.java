@@ -13,7 +13,8 @@ public class ParseHandTest {
         Card card = CardParser.parseCard("5H");
         assertAll(
                 () -> assertEquals("5", card.rank()),
-                () -> assertEquals(Suite.HEARTS, card.suite())
+                () -> assertEquals(Suite.HEARTS, card.suite()),
+                () -> assertEquals(5, card.value())
         );
     }
 
@@ -22,7 +23,10 @@ public class ParseHandTest {
         Card card = CardParser.parseCard("AS");
         assertAll(
                 () -> assertEquals("A", card.rank()),
-                () -> assertEquals(Suite.SPADES, card.suite())
+                () -> assertEquals(Suite.SPADES, card.suite()),
+                () -> assertEquals(1, card.value())
+
         );
     }
+
 }
