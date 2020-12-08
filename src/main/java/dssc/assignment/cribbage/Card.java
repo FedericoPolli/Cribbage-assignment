@@ -2,39 +2,36 @@ package dssc.assignment.cribbage;
 
 public class Card {
 
-    private String CardRank;
+    private Rank CardRank;
     private Suite CardSuite;
-    private int CardValue;
+    private int ValueForFifteenTwos;
 
-    public Card(String CardRank, Suite CardSuite) {
+    public Card(Rank CardRank, Suite CardSuite) {
         this.CardRank = CardRank;
         this.CardSuite = CardSuite;
 
-        if (CardRank.equals("A")) {
-            CardValue = 1;
+        if (CardIsAce()) {
+            ValueForFifteenTwos = 1;
         }
-        else if (this.CardIsPicture()) {
-            CardValue = 10;
+        else if (CardIsPicture()) {
+            ValueForFifteenTwos = 10;
         }
         else {
-            try
-            {
-                CardValue = Integer.parseInt(CardRank);
-            }
-
-            catch (NumberFormatException e)
-            {
-                System.out.println("Unknown card value");
-                CardValue = 0;
-            }
+            ValueForFifteenTwos = CardRank.getValue();
         }
     }
 
-    private boolean CardIsPicture() { return (CardRank.equals("J") || CardRank.equals("Q") || CardRank.equals("K")); }
+    private boolean CardIsAce() {
+        return CardRank.equals(Rank.ACE);
+    }
 
-    public String rank() { return CardRank; }
+    private boolean CardIsPicture() {
+        return (CardRank.equals(Rank.JACK) || CardRank.equals(Rank.QUEEN) || CardRank.equals(Rank.KING));
+    }
+
+    public Rank rank() { return CardRank; }
 
     public Suite suite() { return CardSuite; }
 
-    public int value() {return CardValue;}
+    public int valueFifteenTwos() {return ValueForFifteenTwos;}
 }

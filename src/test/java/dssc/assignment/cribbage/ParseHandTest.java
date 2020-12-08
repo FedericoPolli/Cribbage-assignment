@@ -12,9 +12,9 @@ public class ParseHandTest {
     void parseFiveOfHearts() {
         Card card = CardParser.parseCard("5H");
         assertAll(
-                () -> assertEquals("5", card.rank()),
+                () -> assertEquals(Rank.FIVE, card.rank()),
                 () -> assertEquals(Suite.HEARTS, card.suite()),
-                () -> assertEquals(5, card.value())
+                () -> assertEquals(5, card.valueFifteenTwos())
         );
     }
 
@@ -22,9 +22,20 @@ public class ParseHandTest {
     void parseAceOfSpades() {
         Card card = CardParser.parseCard("AS");
         assertAll(
-                () -> assertEquals("A", card.rank()),
+                () -> assertEquals(Rank.ACE, card.rank()),
                 () -> assertEquals(Suite.SPADES, card.suite()),
-                () -> assertEquals(1, card.value())
+                () -> assertEquals(1, card.valueFifteenTwos())
+
+        );
+    }
+
+    @Test
+    void parseTenOfDiamonds() {
+        Card card = CardParser.parseCard("0D");
+        assertAll(
+                () -> assertEquals(Rank.TEN, card.rank()),
+                () -> assertEquals(Suite.DIAMONDS, card.suite()),
+                () -> assertEquals(10, card.valueFifteenTwos())
 
         );
     }
