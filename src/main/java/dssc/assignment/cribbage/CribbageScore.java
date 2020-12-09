@@ -9,10 +9,12 @@ public class CribbageScore {
 
     public int getScore() {
         int score = 0;
-        if (hand.IsJackSameSuitOfStarterCard()) {
+
+        if (hand.HasJackOfSameSuitAsStarterCard()) {
             score += 1;
         }
-        if (hand.IsFlushInHand()) {
+
+        if (hand.HasFlush()) {
             if (hand.IsFirstCardSameSuitAsStarterCard()) {
                 score += 5;
             } else {
@@ -20,6 +22,7 @@ public class CribbageScore {
             }
         }
 
+        score += 2*hand.NumberOfPairs();
 
         return score;
     }
