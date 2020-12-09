@@ -25,6 +25,8 @@ public class CribbageScore {
 
         score += hand.LengthOfRun();
 
+        score += 2*hand.NumberOfFifteenTwos();
+
         return score;
     }
 }

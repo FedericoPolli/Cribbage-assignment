@@ -1,8 +1,6 @@
 package dssc.assignment.cribbage;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Hand {
@@ -114,4 +112,51 @@ public class Hand {
         }
         return false;
     }
+
+    public int NumberOfFifteenTwos() {
+        Card CurrentCard;
+        List<Integer> FifteenTwos = new ArrayList<>();
+        List<Integer> SubsetSums;
+        int result = 0;
+        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS; i++) {
+            CurrentCard = hand.get(i);
+            FifteenTwos.add(CurrentCard.valueFifteenTwos());
+        }
+        SubsetSums = GenerateSubsetSums(FifteenTwos);
+        for (int x : SubsetSums) {
+            if (x == 15) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    private List<Integer> GenerateSubsetSums(List<Integer> fifteenTwos) {
+        List<List<Integer>> PowerSet = GeneratePowerset(fifteenTwos);
+        List<Integer> SubsetSums = new ArrayList<>();
+        int sum;
+        for (List<Integer> Subset : PowerSet) {
+            sum = 0;
+            for (Integer x : Subset) {
+                sum += x;
+            }
+            SubsetSums.add(sum);
+        }
+        return SubsetSums;
+    }
+
+    private List<List<Integer>> GeneratePowerset(List<Integer> fifteenTwos) {
+        List<List<Integer>> Powerset = new ArrayList<>();
+        for (Integer element : fifteenTwos) {
+            int size = Powerset.size();
+            for (int i = 0; i < size; i++) {
+                List<Integer> TemporaryCopy = new ArrayList<>(Powerset.get(i));
+                TemporaryCopy.add(element);
+                Powerset.add(TemporaryCopy);
+            }
+            Powerset.add(new ArrayList<>(Arrays.asList(element)));
+        }
+        return Powerset;
+    }
+
 }
