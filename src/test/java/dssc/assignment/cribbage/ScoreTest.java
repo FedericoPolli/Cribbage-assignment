@@ -29,4 +29,22 @@ public class ScoreTest {
         CribbageScore score = new CribbageScore("3S5CQHKH2D");
         assertEquals(8, score.getScore());
     }
+
+    @Test
+    void HandExampleFive() {
+        CribbageScore score = new CribbageScore("0C0S3CKHKS");
+        assertEquals(4, score.getScore());
+    }
+
+    @Test
+    void HandExampleSix() {
+        CribbageScore score = new CribbageScore("QCKH3S2D0C");
+        assertEquals(6, score.getScore());
+    }
+
+    @Test
+    void HandExampleSeven() {
+        CribbageScore score = new CribbageScore("AS5D6D4D3D");
+        assertEquals(8, score.getScore());
+    }
 }
