@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class ParseHandTest {
+public class ParseCribbageHandTest {
 
     @Test
     void parseFiveOfHearts() {
         Card card = CardParser.parseCard("5H");
         assertAll(
-                () -> assertEquals(Rank.FIVE, card.rank()),
-                () -> assertEquals(Suite.HEARTS, card.suite()),
+                () -> assertEquals(Rank.FIVE, card.getRank()),
+                () -> assertEquals(Suite.HEARTS, card.getSuite()),
                 () -> assertEquals(5, card.valueFifteenTwos())
         );
     }
@@ -22,8 +22,8 @@ public class ParseHandTest {
     void parseAceOfSpades() {
         Card card = CardParser.parseCard("AS");
         assertAll(
-                () -> assertEquals(Rank.ACE, card.rank()),
-                () -> assertEquals(Suite.SPADES, card.suite()),
+                () -> assertEquals(Rank.ACE, card.getRank()),
+                () -> assertEquals(Suite.SPADES, card.getSuite()),
                 () -> assertEquals(1, card.valueFifteenTwos()),
                 () -> assertEquals(true, card.isAce())
 
@@ -32,10 +32,10 @@ public class ParseHandTest {
 
     @Test
     void parseJackOfDiamonds() {
-        Card card = CardParser.parseCard("JD");
+        Card card = CardParser.parseCard("jd");
         assertAll(
-                () -> assertEquals(Rank.JACK, card.rank()),
-                () -> assertEquals(Suite.DIAMONDS, card.suite()),
+                () -> assertEquals(Rank.JACK, card.getRank()),
+                () -> assertEquals(Suite.DIAMONDS, card.getSuite()),
                 () -> assertEquals(10, card.valueFifteenTwos()),
                 () -> assertEquals(true, card.isJack())
 

@@ -2,13 +2,13 @@ package dssc.assignment.cribbage;
 
 public class Card {
 
-    private Rank CardRank;
-    private Suite CardSuite;
+    private Rank rank;
+    private Suite suite;
     private int ValueForFifteenTwos;
 
-    public Card(Rank CardRank, Suite CardSuite) {
-        this.CardRank = CardRank;
-        this.CardSuite = CardSuite;
+    public Card(Rank rank, Suite suite) {
+        this.rank = rank;
+        this.suite = suite;
 
         if (isAce()) {
             ValueForFifteenTwos = 1;
@@ -17,25 +17,37 @@ public class Card {
             ValueForFifteenTwos = 10;
         }
         else {
-            ValueForFifteenTwos = CardRank.getValue();
+            ValueForFifteenTwos = rank.getValue();
         }
     }
 
-    private boolean IsPicture() {
-        return (CardRank.equals(Rank.JACK) || CardRank.equals(Rank.QUEEN) || CardRank.equals(Rank.KING));
+    public boolean IsPicture() {
+        return (rank.equals(Rank.JACK) || rank.equals(Rank.QUEEN) || rank.equals(Rank.KING));
     }
 
-    public Rank rank() { return CardRank; }
+    public Rank getRank() { return rank; }
 
-    public Suite suite() { return CardSuite; }
+    public Suite getSuite() { return suite; }
 
-    public int valueFifteenTwos() {return ValueForFifteenTwos;}
+    public int valueFifteenTwos() { return ValueForFifteenTwos; }
 
     public boolean isJack() {
-        return (CardRank.equals(Rank.JACK));
+        return (rank.equals(Rank.JACK));
     }
 
     public boolean isAce() {
-        return (CardRank.equals(Rank.ACE));
+        return (rank.equals(Rank.ACE));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Card)) {
+            return false;
+        }
+        Card c = (Card) o;
+        return (rank == c.getRank() && suite.equals(c.getSuite()));
     }
 }

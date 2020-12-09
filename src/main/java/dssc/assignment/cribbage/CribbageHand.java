@@ -3,13 +3,13 @@ package dssc.assignment.cribbage;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Hand {
+public class CribbageHand {
     private static final int TOTAL_NUMBER_OF_CARDS = 5;
     private static final int NUMBER_OF_CARDS_IN_HAND = 4;
 
     private List<Card> hand = new ArrayList<>();
 
-    public Hand(String HandAsText) {
+    public CribbageHand(String HandAsText) {
         String cards;
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS; i++) {
             cards = HandAsText.substring(2*i, 2*i+2);
@@ -17,13 +17,13 @@ public class Hand {
         }
     }
 
-    public boolean HasJackOfSameSuitAsStarterCard() {
+    private boolean HasJackOfSameSuitAsStarterCard() {
         Card currentCard;
         Card starterCard = hand.get(TOTAL_NUMBER_OF_CARDS-1);
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
             currentCard = hand.get(i);
             if (currentCard.isJack()) {
-               if (currentCard.suite().equals(starterCard.suite()))  {
+               if (currentCard.getSuite().equals(starterCard.getSuite()))  {
                    return true;
                }
             }
@@ -32,26 +32,26 @@ public class Hand {
     }
 
 
-    public boolean HasFlush() {
+    private boolean HasFlush() {
         Card currentCard;
         Card followingCard;
         for (int i = 0; i < NUMBER_OF_CARDS_IN_HAND-1; i++) {
             currentCard = hand.get(i);
             followingCard = hand.get(i+1);
-            if (! currentCard.suite().equals(followingCard.suite())) {
+            if (! currentCard.getSuite().equals(followingCard.getSuite())) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean IsFirstCardSameSuitAsStarterCard() {
+    private boolean IsFirstCardSameSuitAsStarterCard() {
         Card FirstCard = hand.get(0);
         Card StarterCard = hand.get(TOTAL_NUMBER_OF_CARDS-1);
-        return (FirstCard.suite().equals(StarterCard.suite()));
+        return (FirstCard.getSuite().equals(StarterCard.getSuite()));
     }
 
-    public int NumberOfPairs() {
+    private int NumberOfPairs() {
         Card CardOne;
         Card CardTwo;
         int Pair_Number = 0;
@@ -59,7 +59,7 @@ public class Hand {
             CardOne = hand.get(i);
             for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++ ) {
                 CardTwo = hand.get(j);
-                if (CardOne.rank().equals(CardTwo.rank())) {
+                if (CardOne.getRank().equals(CardTwo.getRank())) {
                     Pair_Number++;
                 }
             }
@@ -67,8 +67,8 @@ public class Hand {
         return Pair_Number;
     }
 
-    public int LengthOfRun() {
-        List<Card> handCopy = hand.stream().sorted(Comparator.comparing(Card::rank)).collect(Collectors.toList());
+    private int LengthOfRun() {
+        List<Card> handCopy = hand.stream().sorted(Comparator.comparing(Card::getRank)).collect(Collectors.toList());
         int LenOfRun = NormalRuns(handCopy);
         if (AceIsPresent()) {
             LenOfRun = Math.max(RunsWithAceHigh(handCopy), LenOfRun);
@@ -77,7 +77,7 @@ public class Hand {
     }
 
     private int RunsWithAceHigh(List<Card> handCopy) {
-        Card AceHigh = new Card(Rank.ACE_HIGH, handCopy.get(0).suite());
+        Card AceHigh = new Card(Rank.ACE_HIGH, handCopy.get(0).getSuite());
         handCopy.remove(0);
         handCopy.add(AceHigh);
         return NormalRuns(handCopy);
@@ -92,7 +92,7 @@ public class Hand {
             CardOne = handCopy.get(i);
             for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++) {
                 CardTwo = handCopy.get(j);
-                if (CardOne.rank().getValue()+j-i == CardTwo.rank().getValue()) {
+                if (CardOne.getRank().getValue()+j-i == CardTwo.getRank().getValue()) {
                     run++;
                 }
                 else { break; }
@@ -113,7 +113,7 @@ public class Hand {
         return false;
     }
 
-    public int NumberOfFifteenTwos() {
+    private int NumberOfFifteenTwos() {
         Card CurrentCard;
         List<Integer> FifteenTwos = new ArrayList<>();
         List<Integer> SubsetSums;
@@ -122,7 +122,7 @@ public class Hand {
             CurrentCard = hand.get(i);
             FifteenTwos.add(CurrentCard.valueFifteenTwos());
         }
-        SubsetSums = GenerateSubsetSums(FifteenTwos);
+        SubsetSums = Utilities.GenerateSubsetSums(FifteenTwos);
         for (int x : SubsetSums) {
             if (x == 15) {
                 result++;
@@ -131,32 +131,36 @@ public class Hand {
         return result;
     }
 
-    private List<Integer> GenerateSubsetSums(List<Integer> fifteenTwos) {
-        List<List<Integer>> PowerSet = GeneratePowerset(fifteenTwos);
-        List<Integer> SubsetSums = new ArrayList<>();
-        int sum;
-        for (List<Integer> Subset : PowerSet) {
-            sum = 0;
-            for (Integer x : Subset) {
-                sum += x;
-            }
-            SubsetSums.add(sum);
+    public int getCribbageScore() {
+        int score = 0;
+        if (HasJackOfSameSuitAsStarterCard()) {
+            score += 1;
         }
-        return SubsetSums;
+        if (HasFlush()) {
+            score += 4;
+            if (IsFirstCardSameSuitAsStarterCard()) {
+                score += 1;
+            }
+        }
+        score += 2*NumberOfPairs();
+        score += LengthOfRun();
+        score += 2*NumberOfFifteenTwos();
+        return score;
     }
 
-    private List<List<Integer>> GeneratePowerset(List<Integer> fifteenTwos) {
-        List<List<Integer>> Powerset = new ArrayList<>();
-        for (Integer element : fifteenTwos) {
-            int size = Powerset.size();
-            for (int i = 0; i < size; i++) {
-                List<Integer> TemporaryCopy = new ArrayList<>(Powerset.get(i));
-                TemporaryCopy.add(element);
-                Powerset.add(TemporaryCopy);
+    public boolean HasDouble() {
+        Card CardOne;
+        Card CardTwo;
+        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
+            CardOne = hand.get(i);
+            for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++ ) {
+                CardTwo = hand.get(j);
+                if (CardOne.equals(CardTwo)) {
+                    return true;
+                }
             }
-            Powerset.add(new ArrayList<>(Arrays.asList(element)));
         }
-        return Powerset;
+        return false;
     }
 
 }

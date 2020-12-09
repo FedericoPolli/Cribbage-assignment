@@ -1,5 +1,7 @@
 package dssc.assignment.cribbage;
 
+import java.util.Locale;
+
 public class CardParser {
     public static Card parseCard(String cardAsText) {
         String CharSuite = cardAsText.substring(1);
@@ -7,53 +9,34 @@ public class CardParser {
         return new Card(parseRank(CharRank), parseSuite(CharSuite));
     }
 
-    private static Rank parseRank(String charRank) {
-        switch (charRank) {
-            case "A":
-                return Rank.ACE;
-            case "2":
-                return Rank.TWO;
-            case "3":
-                return Rank.THREE;
-            case "4":
-                return Rank.FOUR;
-            case "5":
-                return Rank.FIVE;
-            case "6":
-                return Rank.SIX;
-            case "7":
-                return Rank.SEVEN;
-            case "8":
-                return Rank.EIGHT;
-            case "9":
-                return Rank.NINE;
-            case "0":
-                return Rank.TEN;
-            case "J":
-                return Rank.JACK;
-            case "Q":
-                return Rank.QUEEN;
-            case "K":
-                return Rank.KING;
-            default:
-                System.out.println("Unknown card rank ");
-                return null;
-        }
+    private static Rank parseRank(String charRank) throws IllegalArgumentException {
+        String UppercharRank = charRank.toUpperCase(Locale.ITALIAN);
+        return switch (UppercharRank) {
+            case "A" -> Rank.ACE;
+            case "2" -> Rank.TWO;
+            case "3" -> Rank.THREE;
+            case "4" -> Rank.FOUR;
+            case "5" -> Rank.FIVE;
+            case "6" -> Rank.SIX;
+            case "7" -> Rank.SEVEN;
+            case "8" -> Rank.EIGHT;
+            case "9" -> Rank.NINE;
+            case "0" -> Rank.TEN;
+            case "J" -> Rank.JACK;
+            case "Q" -> Rank.QUEEN;
+            case "K" -> Rank.KING;
+            default -> throw new IllegalArgumentException("Unknown card rank: " + charRank);
+        };
     }
 
-    private static Suite parseSuite(String charSuite) {
-        switch (charSuite) {
-            case "C":
-                return Suite.CLUBS;
-            case "D":
-                return Suite.DIAMONDS;
-            case "H":
-                return Suite.HEARTS;
-            case "S":
-                return Suite.SPADES;
-            default:
-                System.out.println("Unknown card suite ");
-                return null;
-        }
+    private static Suite parseSuite(String charSuite) throws IllegalArgumentException {
+        String UppercharSuite = charSuite.toUpperCase(Locale.ITALIAN);
+        return switch (UppercharSuite) {
+            case "C" -> Suite.CLUBS;
+            case "D" -> Suite.DIAMONDS;
+            case "H" -> Suite.HEARTS;
+            case "S" -> Suite.SPADES;
+            default -> throw new IllegalArgumentException("Unknown card suite " + charSuite);
+        };
     }
 }
