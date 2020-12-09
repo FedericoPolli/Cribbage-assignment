@@ -13,7 +13,8 @@ public enum Rank {
     TEN(10),
     JACK(11),
     QUEEN(12),
-    KING(13);
+    KING(13),
+    ACE_HIGH(14);
 
     private final int value;
 
@@ -25,3 +26,4 @@ public enum Rank {
         return value;
     }
 }
+;

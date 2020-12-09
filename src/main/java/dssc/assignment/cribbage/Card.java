@@ -10,10 +10,10 @@ public class Card {
         this.CardRank = CardRank;
         this.CardSuite = CardSuite;
 
-        if (CardIsAce()) {
+        if (isAce()) {
             ValueForFifteenTwos = 1;
         }
-        else if (CardIsPicture()) {
+        else if (IsPicture()) {
             ValueForFifteenTwos = 10;
         }
         else {
@@ -21,11 +21,7 @@ public class Card {
         }
     }
 
-    private boolean CardIsAce() {
-        return CardRank.equals(Rank.ACE);
-    }
-
-    private boolean CardIsPicture() {
+    private boolean IsPicture() {
         return (CardRank.equals(Rank.JACK) || CardRank.equals(Rank.QUEEN) || CardRank.equals(Rank.KING));
     }
 
@@ -37,5 +33,9 @@ public class Card {
 
     public boolean isJack() {
         return (CardRank.equals(Rank.JACK));
+    }
+
+    public boolean isAce() {
+        return (CardRank.equals(Rank.ACE));
     }
 }

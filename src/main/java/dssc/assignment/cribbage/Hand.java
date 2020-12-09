@@ -3,6 +3,7 @@ package dssc.assignment.cribbage;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Hand {
     private static final int TOTAL_NUMBER_OF_CARDS = 5;
@@ -16,10 +17,6 @@ public class Hand {
             cards = HandAsText.substring(2*i, 2*i+2);
             hand.add(CardParser.parseCard(cards));
         }
-    }
-    
-    public Card GetLastCard() {
-        return hand.get(4);
     }
 
     public boolean HasJackOfSameSuitAsStarterCard() {
@@ -72,4 +69,49 @@ public class Hand {
         return Pair_Number;
     }
 
+    public int LengthOfRun() {
+        List<Card> handCopy = hand.stream().sorted(Comparator.comparing(Card::rank)).collect(Collectors.toList());
+        int LenOfRun = NormalRuns(handCopy);
+        if (AceIsPresent()) {
+            LenOfRun = Math.max(RunsWithAceHigh(handCopy), LenOfRun);
+        }
+        return LenOfRun;
+    }
+
+    private int RunsWithAceHigh(List<Card> handCopy) {
+        Card AceHigh = new Card(Rank.ACE_HIGH, handCopy.get(0).suite());
+        handCopy.remove(0);
+        handCopy.add(AceHigh);
+        return NormalRuns(handCopy);
+    }
+
+    private int NormalRuns(List<Card> handCopy) {
+        Card CardOne;
+        Card CardTwo;
+        int run;
+        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-2; i++) {
+            run = 1;
+            CardOne = handCopy.get(i);
+            for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++) {
+                CardTwo = handCopy.get(j);
+                if (CardOne.rank().getValue()+j-i == CardTwo.rank().getValue()) {
+                    run++;
+                }
+                else { break; }
+            }
+            if (run >= 3) { return run; }
+        }
+        return 0;
+    }
+
+    private boolean AceIsPresent() {
+        Card currentCard;
+        for (int i=0; i < TOTAL_NUMBER_OF_CARDS; i++) {
+            currentCard = hand.get(i);
+            if (currentCard.isAce()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

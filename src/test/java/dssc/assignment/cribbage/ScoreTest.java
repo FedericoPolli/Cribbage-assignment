@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ScoreTest {
 
     @Test
-    void ParseScore() {
-        CribbageScore score = new CribbageScore("ASKS2SJSAH");
-        assertEquals(6, score.getScore());
+    void HandExampleOne() {
+        CribbageScore score = new CribbageScore("0DJHQSAC9D");
+        assertEquals(4, score.getScore());
     }
 }

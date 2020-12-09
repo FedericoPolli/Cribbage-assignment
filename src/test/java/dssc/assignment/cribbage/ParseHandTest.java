@@ -24,7 +24,8 @@ public class ParseHandTest {
         assertAll(
                 () -> assertEquals(Rank.ACE, card.rank()),
                 () -> assertEquals(Suite.SPADES, card.suite()),
-                () -> assertEquals(1, card.valueFifteenTwos())
+                () -> assertEquals(1, card.valueFifteenTwos()),
+                () -> assertEquals(true, card.isAce())
 
         );
     }
@@ -41,9 +42,4 @@ public class ParseHandTest {
         );
     }
 
- /*   @Test
-    void ParseLastCard() {
-        Hand hand = new Hand("AS4H8DKHJS");
-        assertEquals(Rank.KING, hand.GetLastCard().rank());
-    }*/
 }

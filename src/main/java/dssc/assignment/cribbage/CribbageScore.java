@@ -15,14 +15,15 @@ public class CribbageScore {
         }
 
         if (hand.HasFlush()) {
+            score += 4;
             if (hand.IsFirstCardSameSuitAsStarterCard()) {
-                score += 5;
-            } else {
-                score += 4;
+                score += 1;
             }
         }
 
         score += 2*hand.NumberOfPairs();
+
+        score += hand.LengthOfRun();
 
         return score;
     }
