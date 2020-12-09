@@ -12,11 +12,17 @@ public class CribbageHand {
         return hand;
     }
 
-    public CribbageHand(String HandAsText) {
+    public CribbageHand(String HandAsText) throws IllegalArgumentException {
+        if (HandAsText.length() != TOTAL_NUMBER_OF_CARDS*2) {
+            throw new IllegalArgumentException("Wrong number of cards");
+        }
         String cards;
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS; i++) {
             cards = HandAsText.substring(2*i, 2*i+2);
             hand.add(CardParser.parseCard(cards));
+        }
+        if (this.HasDouble()) {
+            throw new IllegalArgumentException("The same card was provided twice.");
         }
     }
 
