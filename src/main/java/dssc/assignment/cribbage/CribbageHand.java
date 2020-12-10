@@ -12,6 +12,10 @@ public class CribbageHand {
         return hand;
     }
 
+    public static int getTotalNumberOfCards() {
+        return TOTAL_NUMBER_OF_CARDS;
+    }
+
     public CribbageHand(String HandAsText) throws IllegalArgumentException {
         if (HandAsText.length() != TOTAL_NUMBER_OF_CARDS*2) {
             throw new IllegalArgumentException("Wrong number of cards");

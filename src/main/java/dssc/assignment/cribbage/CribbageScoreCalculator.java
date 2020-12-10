@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class CribbageScoreCalculator {
 
-    private static final int TOTAL_NUMBER_OF_CARDS = 5;
+    private static final int TOTAL_NUMBER_OF_CARDS = CribbageHand.getTotalNumberOfCards();
     private CribbageHand hand;
 
     public CribbageScoreCalculator(CribbageHand hand) {
