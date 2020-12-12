@@ -7,45 +7,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ScoreTest {
 
     @Test
-    void HandExampleOne() {
+    void RunOfFour() {
         CribbageHand hand = new CribbageHand("0DJHQSAC9D");
         assertEquals(4, hand.getCribbageScore());
     }
 
     @Test
-    void HandExampleTwo() {
+    void DoublePairRoyal_JackOfSameSuit_and_EightFifteenTwos() {
         CribbageHand hand = new CribbageHand("5H5D5SJC5C");
         assertEquals(29, hand.getCribbageScore());
     }
 
     @Test
-    void HandExampleThree() {
-        CribbageHand hand = new CribbageHand("JH2CAS0H9D");
-        assertEquals(3, hand.getCribbageScore());
+    void FlushInHand_and_RunOfFive() {
+        CribbageHand hand = new CribbageHand("JHQH8H0H9D");
+        assertEquals(9, hand.getCribbageScore());
     }
 
     @Test
-    void HandExampleFour() {
+    void FourFifteenTwos() {
         CribbageHand hand = new CribbageHand("3S5CQHKH2D");
         assertEquals(8, hand.getCribbageScore());
     }
 
     @Test
-    void HandExampleFive() {
+    void DoublePair() {
         CribbageHand hand = new CribbageHand("0C0S3CKHKS");
         assertEquals(4, hand.getCribbageScore());
     }
 
     @Test
-    void HandExampleSix() {
-        CribbageHand hand = new CribbageHand("QCKH3S2D0C");
-        assertEquals(6, hand.getCribbageScore());
+    void FullFlushWithJack_and_OneFifteenTwo() {
+        CribbageHand hand = new CribbageHand("QC9C3CJC6C");
+        assertEquals(8, hand.getCribbageScore());
     }
 
     @Test
-    void HandExampleSeven() {
-        CribbageHand hand = new CribbageHand("AS5D6D4D3D");
-        assertEquals(8, hand.getCribbageScore());
+    void PairRoyal_and_RunOfThreeWithAceHigh() {
+        CribbageHand hand = new CribbageHand("ASADAHQDKD");
+        assertEquals(9, hand.getCribbageScore());
     }
 
 }
