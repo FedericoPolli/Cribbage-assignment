@@ -64,14 +64,7 @@ public class CribbageHand {
     }
 
     public boolean AceIsPresent() {
-        Card currentCard;
-        for (int i=0; i < TOTAL_NUMBER_OF_CARDS; i++) {
-            currentCard = hand.get(i);
-            if (currentCard.isAce()) {
-                return true;
-            }
-        }
-        return false;
+        return hand.stream().anyMatch(Card::isAce);
     }
 
     public int getCribbageScore() {
