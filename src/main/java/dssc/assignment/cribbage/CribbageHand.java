@@ -1,6 +1,7 @@
 package dssc.assignment.cribbage;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class CribbageHand {
     private static final int TOTAL_NUMBER_OF_CARDS = 5;
@@ -31,17 +32,8 @@ public class CribbageHand {
     }
 
     public boolean HasJackOfSameSuitAsStarterCard() {
-        Card currentCard;
         Card starterCard = hand.get(TOTAL_NUMBER_OF_CARDS-1);
-        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
-            currentCard = hand.get(i);
-            if (currentCard.isJack()) {
-               if (currentCard.getSuite().equals(starterCard.getSuite()))  {
-                   return true;
-               }
-            }
-        }
-        return false;
+        return hand.stream().filter(Card::isJack).anyMatch(c -> c.HasSameSuitAs(starterCard));
     }
 
     public boolean HasFlush() {
@@ -50,7 +42,7 @@ public class CribbageHand {
         for (int i = 0; i < NUMBER_OF_CARDS_IN_HAND-1; i++) {
             currentCard = hand.get(i);
             followingCard = hand.get(i+1);
-            if (! currentCard.getSuite().equals(followingCard.getSuite())) {
+            if (! currentCard.HasSameSuitAs(followingCard)) {
                 return false;
             }
         }
@@ -60,7 +52,7 @@ public class CribbageHand {
     public boolean IsFirstCardSameSuitAsStarterCard() {
         Card FirstCard = hand.get(0);
         Card StarterCard = hand.get(TOTAL_NUMBER_OF_CARDS-1);
-        return (FirstCard.getSuite().equals(StarterCard.getSuite()));
+        return FirstCard.HasSameSuitAs(StarterCard);
     }
 
     public boolean AceIsPresent() {

@@ -50,4 +50,8 @@ public class Card {
         Card c = (Card) o;
         return (rank == c.getRank() && suite.equals(c.getSuite()));
     }
+
+    public boolean HasSameSuitAs(Card otherCard) {
+        return (suite.equals(otherCard.getSuite()));
+    }
 }
