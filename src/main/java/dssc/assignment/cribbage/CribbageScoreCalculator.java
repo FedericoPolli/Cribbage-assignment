@@ -8,6 +8,10 @@ public class CribbageScoreCalculator {
         this.hand = hand;
     }
 
+    public CribbageScoreCalculator(String handAsText) {
+        this.hand = new CribbageHand(handAsText);
+    }
+
     public int getCribbageScore() {
         int score = 0;
         if (hand.HasJackOfSameSuitAsStarterCard()) {

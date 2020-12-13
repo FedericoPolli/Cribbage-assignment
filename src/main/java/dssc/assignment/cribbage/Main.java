@@ -6,8 +6,8 @@ public class Main {
             try {
                 CribbageHand HandOne = new CribbageHand(args[0]);
                 CribbageHand HandTwo = new CribbageHand(args[1]);
-                int scoreOne = HandOne.getCribbageScore();
-                int scoreTwo = HandTwo.getCribbageScore();
+                int scoreOne = new CribbageScoreCalculator(HandOne).getCribbageScore();
+                int scoreTwo = new CribbageScoreCalculator(HandTwo).getCribbageScore();
                 System.out.println("Score player one: " + scoreOne);
                 System.out.println("Score player two: " + scoreTwo);
             } catch (IllegalArgumentException e) {

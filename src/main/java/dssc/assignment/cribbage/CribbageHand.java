@@ -45,11 +45,6 @@ public class CribbageHand {
         return hand.stream().anyMatch(Card::IsAce);
     }
 
-    public int getCribbageScore() {
-        CribbageScoreCalculator Score = new CribbageScoreCalculator(this);
-        return Score.getCribbageScore();
-    }
-
     public boolean HasDouble() {
         Card CardOne, CardTwo;
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {

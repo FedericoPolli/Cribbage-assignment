@@ -9,44 +9,50 @@ public class ScoreTest {
 
     @Test
     void RunOfFour() {
-        CribbageHand hand = new CribbageHand("0DJHQSAC9D");
-        assertEquals(4, hand.getCribbageScore());
+        CribbageScoreCalculator score = new CribbageScoreCalculator("0DJHQSAC9D");
+        assertEquals(4, score.getCribbageScore());
     }
 
     @Test
     void DoublePairRoyal_JackOfSameSuit_and_EightFifteenTwos() {
-        CribbageHand hand = new CribbageHand("5H5D5SJC5C");
-        assertEquals(29, hand.getCribbageScore());
+        CribbageScoreCalculator score = new CribbageScoreCalculator("5H5D5SJC5C");
+        assertEquals(29, score.getCribbageScore());
     }
 
     @Test
     void FlushInHand_and_RunOfFive() {
-        CribbageHand hand = new CribbageHand("JHQH8H0H9D");
-        assertEquals(9, hand.getCribbageScore());
+        CribbageScoreCalculator score = new CribbageScoreCalculator("JHQH8H0H9D");
+        assertEquals(9, score.getCribbageScore());
     }
 
     @Test
     void FourFifteenTwos() {
-        CribbageHand hand = new CribbageHand("3S5CQHKH2D");
-        assertEquals(8, hand.getCribbageScore());
+        CribbageScoreCalculator score = new CribbageScoreCalculator("3S5CQHKH2D");
+        assertEquals(8, score.getCribbageScore());
     }
 
     @Test
     void DoublePair() {
-        CribbageHand hand = new CribbageHand("0C0S3CKHKS");
-        assertEquals(4, hand.getCribbageScore());
+        CribbageScoreCalculator score = new CribbageScoreCalculator("0C0S3CKHKS");
+        assertEquals(4, score.getCribbageScore());
     }
 
     @Test
     void FullFlushWithJack_and_OneFifteenTwo() {
-        CribbageHand hand = new CribbageHand("QC9C3CJC6C");
-        assertEquals(8, hand.getCribbageScore());
+        CribbageScoreCalculator score = new CribbageScoreCalculator("QC9C3CJC6C");
+        assertEquals(8, score.getCribbageScore());
     }
 
     @Test
     void PairRoyal_and_RunOfThreeWithAceHigh() {
-        CribbageHand hand = new CribbageHand("ASADAHQDKD");
-        assertEquals(9, hand.getCribbageScore());
+        CribbageScoreCalculator score = new CribbageScoreCalculator("ASADAHQDKD");
+        assertEquals(9, score.getCribbageScore());
+    }
+
+    @Test
+    void NoPointsInHand() {
+        CribbageScoreCalculator score = new CribbageScoreCalculator("0SJDAH2DKH");
+        assertEquals(0, score.getCribbageScore());
     }
 
     @Test
