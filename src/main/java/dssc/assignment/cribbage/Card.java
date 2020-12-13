@@ -5,6 +5,7 @@ public class Card {
     private Rank rank;
     private Suite suite;
     private int ValueForFifteenTwos;
+    private int rankValue;
 
     public Card(Rank rank, Suite suite) {
         this.rank = rank;
@@ -19,6 +20,8 @@ public class Card {
         else {
             ValueForFifteenTwos = rank.getValue();
         }
+
+        rankValue = rank.getValue();
     }
 
     public boolean IsPicture() {
@@ -53,5 +56,13 @@ public class Card {
 
     public boolean HasSameSuitAs(Card otherCard) {
         return (suite.equals(otherCard.getSuite()));
+    }
+
+    public boolean HasSameRankAs(Card otherCard) {
+        return (rank.equals(otherCard.getRank()));
+    }
+
+    public int getRankValue() {
+        return rankValue;
     }
 }

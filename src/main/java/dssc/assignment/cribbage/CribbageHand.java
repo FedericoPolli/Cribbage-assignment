@@ -1,20 +1,13 @@
 package dssc.assignment.cribbage;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CribbageHand {
     private static final int TOTAL_NUMBER_OF_CARDS = 5;
     private static final int NUMBER_OF_CARDS_IN_HAND = 4;
 
     private List<Card> hand = new ArrayList<>();
-
-    public List<Card> getHand() {
-        return hand;
-    }
-
-    public static int getTotalNumberOfCards() {
-        return TOTAL_NUMBER_OF_CARDS;
-    }
 
     public CribbageHand(String HandAsText) throws IllegalArgumentException {
         if (HandAsText.length() != TOTAL_NUMBER_OF_CARDS*2) {
@@ -72,4 +65,72 @@ public class CribbageHand {
         return false;
     }
 
+    public int NumberOfPairs() {
+        Card CardOne;
+        Card CardTwo;
+        int Pair_Number = 0;
+        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
+            CardOne = hand.get(i);
+            for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++ ) {
+                CardTwo = hand.get(j);
+                if (CardOne.HasSameRankAs(CardTwo)) {
+                    Pair_Number++;
+                }
+            }
+        }
+        return Pair_Number;
+    }
+
+    public int LengthOfRun() {
+        List<Card> handCopy = hand.stream().sorted(Comparator.comparing(Card::getRank)).collect(Collectors.toList());
+        int LenOfRun = NormalRuns(handCopy);
+        if (AceIsPresent()) {
+            LenOfRun = Math.max(RunsWithAceHigh(handCopy), LenOfRun);
+        }
+        return LenOfRun;
+    }
+
+    private int RunsWithAceHigh(List<Card> handCopy) {
+        Card AceHigh = new Card(Rank.ACE_HIGH, handCopy.get(0).getSuite());
+        handCopy.remove(0);
+        handCopy.add(AceHigh);
+        return NormalRuns(handCopy);
+    }
+
+    private int NormalRuns(List<Card> handCopy) {
+        Card CardOne;
+        Card CardTwo;
+        int run;
+        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-2; i++) {
+            run = 1;
+            CardOne = handCopy.get(i);
+            for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++) {
+                CardTwo = handCopy.get(j);
+                if (CardOne.getRankValue()+j-i == CardTwo.getRankValue()) {
+                    run++;
+                }
+                else { break; }
+            }
+            if (run >= 3) { return run; }
+        }
+        return 0;
+    }
+
+    public int NumberOfFifteenTwos() {
+        Card CurrentCard;
+        List<Integer> FifteenTwos = new ArrayList<>();
+        List<Integer> SubsetSums;
+        int result = 0;
+        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS; i++) {
+            CurrentCard = hand.get(i);
+            FifteenTwos.add(CurrentCard.valueFifteenTwos());
+        }
+        SubsetSums = Utilities.GenerateSubsetSums(FifteenTwos);
+        for (int x : SubsetSums) {
+            if (x == 15) {
+                result++;
+            }
+        }
+        return result;
+    }
 }
