@@ -33,7 +33,7 @@ public class ParseCribbageHandTest {
 
     @Test
     void CheckIfNotJack() {
-        Card card = new Card(Rank.JACK, Suite.DIAMONDS);
+        Card card = new Card(Rank.FOUR, Suite.DIAMONDS);
         assertFalse(card.IsJack());
     }
 
