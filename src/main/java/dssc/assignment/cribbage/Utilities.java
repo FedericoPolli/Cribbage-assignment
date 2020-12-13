@@ -8,13 +8,8 @@ public class Utilities {
     public static List<Integer> GenerateSubsetSums(List<Integer> set) {
         List<List<Integer>> PowerSet = GeneratePowerset(set);
         List<Integer> SubsetSums = new ArrayList<>();
-        int sum;
         for (List<Integer> Subset : PowerSet) {
-            sum = 0;
-            for (Integer x : Subset) {
-                sum += x;
-            }
-            SubsetSums.add(sum);
+            SubsetSums.add(Subset.stream().mapToInt(Integer::intValue).sum());
         }
         return SubsetSums;
     }

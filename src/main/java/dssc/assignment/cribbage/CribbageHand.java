@@ -51,8 +51,7 @@ public class CribbageHand {
     }
 
     public boolean HasDouble() {
-        Card CardOne;
-        Card CardTwo;
+        Card CardOne, CardTwo;
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
             CardOne = hand.get(i);
             for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++ ) {
@@ -66,8 +65,7 @@ public class CribbageHand {
     }
 
     public int NumberOfPairs() {
-        Card CardOne;
-        Card CardTwo;
+        Card CardOne, CardTwo;
         int Pair_Number = 0;
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
             CardOne = hand.get(i);
@@ -98,8 +96,7 @@ public class CribbageHand {
     }
 
     private int NormalRuns(List<Card> handCopy) {
-        Card CardOne;
-        Card CardTwo;
+        Card CardOne, CardTwo;
         int run;
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-2; i++) {
             run = 1;
