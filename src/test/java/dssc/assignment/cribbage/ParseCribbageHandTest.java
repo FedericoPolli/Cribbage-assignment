@@ -27,13 +27,13 @@ public class ParseCribbageHandTest {
 
     @Test
     void CheckIfAce() {
-        Card card = CardParser.parseCard("AH");
+        Card card = new Card(Rank.ACE, Suite.HEARTS);
         assertTrue(card.IsAce());
     }
 
     @Test
     void CheckIfNotJack() {
-        Card card = CardParser.parseCard("4C");
+        Card card = new Card(Rank.JACK, Suite.DIAMONDS);
         assertFalse(card.IsJack());
     }
 
