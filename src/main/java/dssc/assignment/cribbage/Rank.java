@@ -31,19 +31,19 @@ public enum Rank {
     public static Rank parseRank(String charRank) throws IllegalArgumentException {
         String UppercharRank = charRank.toUpperCase(Locale.ITALIAN);
         return switch (UppercharRank) {
-            case "A" -> Rank.ACE;
-            case "2" -> Rank.TWO;
-            case "3" -> Rank.THREE;
-            case "4" -> Rank.FOUR;
-            case "5" -> Rank.FIVE;
-            case "6" -> Rank.SIX;
-            case "7" -> Rank.SEVEN;
-            case "8" -> Rank.EIGHT;
-            case "9" -> Rank.NINE;
-            case "0" -> Rank.TEN;
-            case "J" -> Rank.JACK;
-            case "Q" -> Rank.QUEEN;
-            case "K" -> Rank.KING;
+            case "A" -> ACE;
+            case "2" -> TWO;
+            case "3" -> THREE;
+            case "4" -> FOUR;
+            case "5" -> FIVE;
+            case "6" -> SIX;
+            case "7" -> SEVEN;
+            case "8" -> EIGHT;
+            case "9" -> NINE;
+            case "0" -> TEN;
+            case "J" -> JACK;
+            case "Q" -> QUEEN;
+            case "K" -> KING;
             default -> throw new IllegalArgumentException("Unknown card rank: " + charRank);
         };
     }
