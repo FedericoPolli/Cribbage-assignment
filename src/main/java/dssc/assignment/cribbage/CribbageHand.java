@@ -1,7 +1,6 @@
 package dssc.assignment.cribbage;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 public class CribbageHand {
     private static final int TOTAL_NUMBER_OF_CARDS = 5;
@@ -33,7 +32,8 @@ public class CribbageHand {
 
     public boolean HasJackOfSameSuitAsStarterCard() {
         Card starterCard = hand.get(TOTAL_NUMBER_OF_CARDS-1);
-        return hand.stream().filter(Card::isJack).anyMatch(c -> c.HasSameSuitAs(starterCard));
+        int length = hand.size();
+        return hand.subList(0,length-1).stream().filter(Card::isJack).anyMatch(c -> c.HasSameSuitAs(starterCard));
     }
 
     public boolean HasFlush() {
