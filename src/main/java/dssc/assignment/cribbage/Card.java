@@ -10,7 +10,7 @@ public class Card {
         this.rank = rank;
         this.suite = suite;
 
-        if (isAce()) {
+        if (IsAce()) {
             ValueForFifteenTwos = 1;
         }
         else if (IsPicture()) {
@@ -31,11 +31,11 @@ public class Card {
 
     public int valueFifteenTwos() { return ValueForFifteenTwos; }
 
-    public boolean isJack() {
+    public boolean IsJack() {
         return (rank.equals(Rank.JACK));
     }
 
-    public boolean isAce() {
+    public boolean IsAce() {
         return (rank.equals(Rank.ACE));
     }
 

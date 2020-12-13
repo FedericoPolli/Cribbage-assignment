@@ -32,21 +32,14 @@ public class CribbageHand {
 
     public boolean HasJackOfSameSuitAsStarterCard() {
         Card starterCard = hand.get(TOTAL_NUMBER_OF_CARDS-1);
-        int length = hand.size();
-        return hand.subList(0,length-1).stream().filter(Card::isJack).anyMatch(c -> c.HasSameSuitAs(starterCard));
+        List<Card> actualHand = hand.subList(0,NUMBER_OF_CARDS_IN_HAND);
+        return actualHand.stream().filter(Card::IsJack).anyMatch(c -> c.HasSameSuitAs(starterCard));
     }
 
     public boolean HasFlush() {
-        Card currentCard;
-        Card followingCard;
-        for (int i = 0; i < NUMBER_OF_CARDS_IN_HAND-1; i++) {
-            currentCard = hand.get(i);
-            followingCard = hand.get(i+1);
-            if (! currentCard.HasSameSuitAs(followingCard)) {
-                return false;
-            }
-        }
-        return true;
+        Card firstCard = hand.get(0);
+        List<Card> actualHand = hand.subList(0,NUMBER_OF_CARDS_IN_HAND);
+        return actualHand.stream().allMatch(c -> c.HasSameSuitAs(firstCard));
     }
 
     public boolean IsFirstCardSameSuitAsStarterCard() {
@@ -56,7 +49,7 @@ public class CribbageHand {
     }
 
     public boolean AceIsPresent() {
-        return hand.stream().anyMatch(Card::isAce);
+        return hand.stream().anyMatch(Card::IsAce);
     }
 
     public int getCribbageScore() {

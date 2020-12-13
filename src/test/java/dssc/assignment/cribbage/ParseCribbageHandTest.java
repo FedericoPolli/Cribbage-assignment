@@ -28,13 +28,28 @@ public class ParseCribbageHandTest {
     @Test
     void CheckIfAce() {
         Card card = CardParser.parseCard("AH");
-        assertTrue(card.isAce());
+        assertTrue(card.IsAce());
     }
 
     @Test
     void CheckIfNotJack() {
         Card card = CardParser.parseCard("4C");
-        assertFalse(card.isJack());
+        assertFalse(card.IsJack());
+    }
+
+    @Test
+    void IllegalSuite() {
+        assertThrows(IllegalArgumentException.class, () -> {CardParser.parseCard("4R");});
+    }
+
+    @Test
+    void IllegalRank() {
+        assertThrows(IllegalArgumentException.class, () -> {CardParser.parseCard("NC");});
+    }
+
+    @Test
+    void IllegalLength() {
+        assertThrows(IllegalArgumentException.class, () -> {CardParser.parseCard("2CC");});
     }
 
 }
