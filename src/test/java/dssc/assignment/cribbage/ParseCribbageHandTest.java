@@ -39,17 +39,17 @@ public class ParseCribbageHandTest {
 
     @Test
     void IllegalSuite() {
-        assertThrows(IllegalArgumentException.class, () -> {CardParser.parseCard("4R");});
+        assertThrows(IllegalArgumentException.class, () -> CardParser.parseCard("4R"));
     }
 
     @Test
     void IllegalRank() {
-        assertThrows(IllegalArgumentException.class, () -> {CardParser.parseCard("NC");});
+        assertThrows(IllegalArgumentException.class, () -> CardParser.parseCard("NC"));
     }
 
     @Test
     void IllegalLength() {
-        assertThrows(IllegalArgumentException.class, () -> {CardParser.parseCard("2CC");});
+        assertThrows(IllegalArgumentException.class, () -> CardParser.parseCard("2CC"));
     }
 
 }

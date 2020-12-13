@@ -2,6 +2,7 @@ package dssc.assignment.cribbage;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class ScoreTest {
@@ -48,4 +49,13 @@ public class ScoreTest {
         assertEquals(9, hand.getCribbageScore());
     }
 
+    @Test
+    void IllegalNumberOfCards() {
+        assertThrows(IllegalArgumentException.class, () -> new CribbageHand("ASADAHQDKDKH"));
+    }
+
+    @Test
+    void HasSameCardTwice() {
+        assertThrows(IllegalArgumentException.class, () -> new CribbageHand("ASADAHQDAS"));
+    }
 }
