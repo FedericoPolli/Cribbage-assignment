@@ -100,7 +100,7 @@ public class CribbageHand {
 
     public int NumberOfFifteenTwos() {
         List<Integer> SubsetSums;
-        List<Integer> FifteenTwos = hand.stream().map(c -> c.valueFifteenTwos()).collect(Collectors.toList());
+        List<Integer> FifteenTwos = hand.stream().map(Card::valueFifteenTwos).collect(Collectors.toList());
         SubsetSums = Utilities.GenerateSubsetSums(FifteenTwos);
         return (int) SubsetSums.stream().filter(x -> x == 15).count();
     }
