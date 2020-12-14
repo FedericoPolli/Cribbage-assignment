@@ -80,13 +80,13 @@ public class CribbageHand {
 
     private int NormalRuns(List<Card> handCopy) {
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-2; i++) {
-            int run = checkRun(i, handCopy);
+            int run = CheckRun(i, handCopy);
             if (run >= 3) { return run; }
         }
         return 0;
     }
 
-    private int checkRun(int i, List<Card> handCopy) {
+    private int CheckRun(int i, List<Card> handCopy) {
         int run = 1;
         Card CardOne = handCopy.get(i);
         for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++) {
