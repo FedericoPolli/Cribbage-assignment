@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Utilities {
+
     public static List<Integer> GenerateSubsetSums(List<Integer> set) {
         List<List<Integer>> PowerSet = GeneratePowerset(set);
         return PowerSet.stream().map(SubsetToSubsetSum()).collect(Collectors.toList());

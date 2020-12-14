@@ -50,18 +50,16 @@ public class CribbageHand {
     }
 
     public int NumberOfPairs() {
-        Card CardOne, CardTwo;
         int Pair_Number = 0;
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
-            CardOne = hand.get(i);
-            for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++ ) {
-                CardTwo = hand.get(j);
-                if (CardOne.HasSameRankAs(CardTwo)) {
-                    Pair_Number++;
-                }
-            }
+            Pair_Number += CountNumberOfSameCards(i);
         }
         return Pair_Number;
+    }
+
+    private int CountNumberOfSameCards(int i) {
+        Card CardOne = hand.get(i);
+        return (int) hand.subList(i+1, TOTAL_NUMBER_OF_CARDS).stream().filter(card -> card.HasSameRankAs(CardOne)).count();
     }
 
     public int LengthOfRun() {
