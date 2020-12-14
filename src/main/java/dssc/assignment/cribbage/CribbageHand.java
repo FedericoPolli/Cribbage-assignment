@@ -51,15 +51,15 @@ public class CribbageHand {
 
     public int NumberOfPairs() {
         int Pair_Number = 0;
-        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
-            Pair_Number += CountNumberOfSameCards(i);
+        for (int cardIndex = 0; cardIndex < TOTAL_NUMBER_OF_CARDS-1; cardIndex++) {
+            Pair_Number += CountNumberOfSameCards(cardIndex);
         }
         return Pair_Number;
     }
 
-    private int CountNumberOfSameCards(int i) {
-        Card CardOne = hand.get(i);
-        return (int) hand.subList(i+1, TOTAL_NUMBER_OF_CARDS).stream().filter(card -> card.HasSameRankAs(CardOne)).count();
+    private int CountNumberOfSameCards(int cardIndex) {
+        Card CardOne = hand.get(cardIndex);
+        return (int) hand.subList(cardIndex+1, TOTAL_NUMBER_OF_CARDS).stream().filter(card -> card.HasSameRankAs(CardOne)).count();
     }
 
     public int LengthOfRun() {
@@ -79,21 +79,24 @@ public class CribbageHand {
     }
 
     private int NormalRuns(List<Card> handCopy) {
-        Card CardOne, CardTwo;
-        int run;
         for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-2; i++) {
-            run = 1;
-            CardOne = handCopy.get(i);
-            for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++) {
-                CardTwo = handCopy.get(j);
-                if (CardOne.getRankValue()+j-i == CardTwo.getRankValue()) {
-                    run++;
-                }
-                else { break; }
-            }
+            int run = checkRun(i, handCopy);
             if (run >= 3) { return run; }
         }
         return 0;
+    }
+
+    private int checkRun(int i, List<Card> handCopy) {
+        int run = 1;
+        Card CardOne = handCopy.get(i);
+        for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++) {
+            Card CardTwo = handCopy.get(j);
+            if (CardOne.getRankValue()+j-i == CardTwo.getRankValue()) {
+                run++;
+            }
+            else { break; }
+        }
+        return run;
     }
 
     public int NumberOfFifteenTwos() {
