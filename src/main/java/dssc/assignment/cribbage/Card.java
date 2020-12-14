@@ -2,11 +2,11 @@ package dssc.assignment.cribbage;
 
 public class Card {
 
-    private Rank rank;
-    private Suite suite;
-    private int ValueForFifteenTwos;
-    private int rankValue;
-    private int suiteValue;
+    private final Rank rank;
+    private final Suite suite;
+    private final int ValueForFifteenTwos;
+    private final int rankValue;
+    private final int suiteValue;
 
     public Card(Rank rank, Suite suite) {
         this.rank = rank;
@@ -44,6 +44,18 @@ public class Card {
         return (rank.equals(Rank.ACE));
     }
 
+    public boolean HasSameSuitAs(Card otherCard) {
+        return (suite.equals(otherCard.getSuite()));
+    }
+
+    public boolean HasSameRankAs(Card otherCard) {
+        return (rank.equals(otherCard.getRank()));
+    }
+
+    public int getRankValue() {
+        return rankValue;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -59,17 +71,5 @@ public class Card {
     @Override
     public int hashCode() {
         return 17 * rankValue + 31 * suiteValue;
-    }
-
-    public boolean HasSameSuitAs(Card otherCard) {
-        return (suite.equals(otherCard.getSuite()));
-    }
-
-    public boolean HasSameRankAs(Card otherCard) {
-        return (rank.equals(otherCard.getRank()));
-    }
-
-    public int getRankValue() {
-        return rankValue;
     }
 }

@@ -7,7 +7,7 @@ public class CribbageHand {
     private static final int TOTAL_NUMBER_OF_CARDS = 5;
     private static final int NUMBER_OF_CARDS_IN_HAND = 4;
 
-    private List<Card> hand = new ArrayList<>();
+    private final List<Card> hand = new ArrayList<>();
 
     public CribbageHand(String HandAsText) throws IllegalArgumentException {
         if (HandAsText.length() != TOTAL_NUMBER_OF_CARDS*2) {
