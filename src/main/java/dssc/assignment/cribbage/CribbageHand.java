@@ -46,17 +46,7 @@ public class CribbageHand {
     }
 
     public boolean HasDouble() {
-        Card CardOne, CardTwo;
-        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-1; i++) {
-            CardOne = hand.get(i);
-            for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++ ) {
-                CardTwo = hand.get(j);
-                if (CardOne.equals(CardTwo)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return !(hand.stream().allMatch(new HashSet<>()::add));
     }
 
     public int NumberOfPairs() {

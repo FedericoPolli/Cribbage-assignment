@@ -3,7 +3,17 @@ package dssc.assignment.cribbage;
 import java.util.Locale;
 
 public enum Suite {
-    HEARTS, CLUBS, DIAMONDS, SPADES;
+    HEARTS(1), DIAMONDS(2), CLUBS(3),  SPADES(4);
+
+    private final int value;
+
+    Suite(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 
     public static Suite parseSuite(String charSuite) throws IllegalArgumentException {
         String UppercharSuite = charSuite.toUpperCase(Locale.ITALIAN);
