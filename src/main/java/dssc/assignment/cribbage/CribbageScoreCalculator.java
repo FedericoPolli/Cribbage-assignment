@@ -14,19 +14,37 @@ public class CribbageScoreCalculator {
 
     public int getCribbageScore() {
         int score = 0;
+        score += FifteenTwosScore();
+        score += RunsScore();
+        score += PairsScore();
+        score += FlushScore();
+        return score;
+    }
+
+    private int FlushScore() {
+        int flushScore = 0;
         if (hand.HasJackOfSameSuitAsStarterCard()) {
-            score += 1;
+            flushScore += 1;
         }
         if (hand.HasFlush()) {
-            score += 4;
+            flushScore += 4;
             if (hand.IsFirstCardSameSuitAsStarterCard()) {
-                score += 1;
+                flushScore += 1;
             }
         }
-        score += 2*hand.NumberOfPairs();
-        score += hand.LengthOfRun();
-        score += 2*hand.NumberOfFifteenTwos();
-        return score;
+        return flushScore;
+    }
+
+    private int PairsScore() {
+        return 2*hand.NumberOfPairs();
+    }
+
+    private int RunsScore() {
+        return hand.LengthOfRun();
+    }
+
+    private int FifteenTwosScore() {
+        return 2*hand.NumberOfFifteenTwos();
     }
 
 }
