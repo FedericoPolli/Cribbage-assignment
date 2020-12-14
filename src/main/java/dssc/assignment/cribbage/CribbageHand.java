@@ -99,20 +99,9 @@ public class CribbageHand {
     }
 
     public int NumberOfFifteenTwos() {
-        Card CurrentCard;
-        List<Integer> FifteenTwos = new ArrayList<>();
         List<Integer> SubsetSums;
-        int result = 0;
-        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS; i++) {
-            CurrentCard = hand.get(i);
-            FifteenTwos.add(CurrentCard.valueFifteenTwos());
-        }
+        List<Integer> FifteenTwos = hand.stream().map(c -> c.valueFifteenTwos()).collect(Collectors.toList());
         SubsetSums = Utilities.GenerateSubsetSums(FifteenTwos);
-        for (int x : SubsetSums) {
-            if (x == 15) {
-                result++;
-            }
-        }
-        return result;
+        return (int) SubsetSums.stream().filter(x -> x == 15).count();
     }
 }
