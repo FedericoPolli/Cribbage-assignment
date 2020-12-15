@@ -79,24 +79,8 @@ public class CribbageHand {
     }
 
     private int NormalRuns(List<Card> handCopy) {
-        for (int i = 0; i < TOTAL_NUMBER_OF_CARDS-2; i++) {
-            int run = CheckRun(i, handCopy);
-            if (run >= 3) { return run; }
-        }
-        return 0;
-    }
-
-    private int CheckRun(int i, List<Card> handCopy) {
-        int run = 1;
-        Card CardOne = handCopy.get(i);
-        for (int j = i+1; j < TOTAL_NUMBER_OF_CARDS; j++) {
-            Card CardTwo = handCopy.get(j);
-            if (CardOne.getRankValue()+j-i == CardTwo.getRankValue()) {
-                run++;
-            }
-            else { break; }
-        }
-        return run;
+        List<Rank> Ranks = handCopy.stream().map(Card::getRank).collect(Collectors.toList());
+        return Rank.FindConsecutiveRanks(Ranks);
     }
 
     public int NumberOfFifteenTwos() {

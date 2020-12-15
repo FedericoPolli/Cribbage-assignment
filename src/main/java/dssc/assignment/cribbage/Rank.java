@@ -1,5 +1,6 @@
 package dssc.assignment.cribbage;
 
+import java.util.List;
 import java.util.Locale;
 
 public enum Rank {
@@ -22,6 +23,20 @@ public enum Rank {
 
     Rank(int value) {
         this.value = value;
+    }
+
+    public static int FindConsecutiveRanks(List<Rank> ranks) {
+        for (int i = 0; i < ranks.size()-2; i++) {
+            int RanksRun = 1;
+            for (int j = i+1; j < ranks.size(); j++) {
+                if (ranks.get(i).value + j - i == ranks.get(j).value) {
+                    RanksRun++;
+                }
+                else { break; }
+            }
+            if (RanksRun >= 3) { return RanksRun; }
+        }
+        return 0;
     }
 
     public int getValue() {
